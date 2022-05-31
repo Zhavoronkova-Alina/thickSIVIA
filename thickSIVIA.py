@@ -43,20 +43,20 @@ def thickSIVIA(X0, test, eps):
 
 
 def draw_thickSIVIA_result(L_clear: deque, L_dark: deque, L_penumbra: deque, L_too_small: deque):
-    while len(L_clear) > 0:
+    while len(L_clear) > 0: # red
         X = L_clear.popleft()
-        vibes.drawBox(X[0][0], X[0][1], X[1][0], X[1][1], '[r]')
+        vibes.drawBox(X[0][0], X[0][1], X[1][0], X[1][1], '[#DC143C]')
 
-    while len(L_dark) > 0:
+    while len(L_dark) > 0: # blue
         X = L_dark.popleft()
-        vibes.drawBox(X[0][0], X[0][1], X[1][0], X[1][1], '[b]')
+        vibes.drawBox(X[0][0], X[0][1], X[1][0], X[1][1], '[#00BFFF]')
 
-    while len(L_penumbra) > 0:
+    while len(L_penumbra) > 0: # orange
         X = L_penumbra.popleft()
-        vibes.drawBox(X[0][0], X[0][1], X[1][0], X[1][1], '[orange]')
+        vibes.drawBox(X[0][0], X[0][1], X[1][0], X[1][1], '[#FF8C00]')
 
-    while len(L_too_small) > 0:
+    while len(L_too_small) > 0: # yellow
         X = L_too_small.popleft()
-        vibes.drawBox(X[0][0], X[0][1], X[1][0], X[1][1], '[y]')
+        vibes.drawBox(X[0][0], X[0][1], X[1][0], X[1][1], '[#FFD700]')
 
     vibes.axisEqual()
