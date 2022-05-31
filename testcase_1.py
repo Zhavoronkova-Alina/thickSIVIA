@@ -2,12 +2,21 @@ from pyibex import *
 from thickSIVIA import *
 from vibes import vibes
 
+# The thick set [[ Y ]] = [Y_subset, Y_supset]
+# Y_subset -- disk with center (0, 0) and with radius r_subset = 1
+# Y_supset -- disk with center (0, 0) and with radius r_supset = 2
+# The thick function [f](x) = x - [v]
+# [v] = [0.7, 1.3] x [-0.02, 0.02]
+# Find approximation of [[ X ]] = [f]^(-1) ([[ Y ]]) using three types of intervals:
+# 1. Classical intervals
+# 2. The thick intervals with a subset-supset representation
+# 3. The thick intervals defined by lower-upper interval bounds
 
 class ThickDisk:
-    def __init__(self, mx, my, rmin=0, rmax=1, is_thin=False):
+    def __init__(self, mx, my, r_min=0, r_max=1, is_thin=False):
         self.m = IntervalVector([mx, my])
-        self.Bp = Interval(0, rmax ** 2)
-        self.Bm = Interval(0, rmin ** 2)
+        self.Bp = Interval(0, r_max ** 2)
+        self.Bm = Interval(0, r_min ** 2)
         self.is_thin = is_thin
 
     def test(self, X):
@@ -93,27 +102,27 @@ class ThickDisk_subsup:
 def testcase_1():
     vibes.beginDrawing()
 
-    mx = Interval(1).inflate(0.3)
-    my = Interval(0).inflate(0.02)
-    rmin = 1
-    rmax = 2
+    mx = Interval(1).inflate(0.3) # [0.7, 1.3]
+    my = Interval(0).inflate(0.02) # [-0.02, 0.02]
+    r_min = 1
+    r_max = 2
     eps = 0.1
 
     X0 = IntervalVector([[-2, 4], [-3, 3]])
 
     vibes.newFigure('TestCase1 thin')
     vibes.setFigureProperties(dict(x=0, y=10, width=500, height=500))
-    L_clear, L_dark, L_penumbra, L_too_small = thickSIVIA(X0, ThickDisk(mx, my, rmin, rmax, True), eps)
-    drawThickSIVIA_Result(L_clear, L_dark, L_penumbra, L_too_small)
+    L_clear, L_dark, L_penumbra, L_too_small = thickSIVIA(X0, ThickDisk(mx, my, r_min, r_max, True), eps)
+    draw_thickSIVIA_result(L_clear, L_dark, L_penumbra, L_too_small)
 
     vibes.newFigure('TestCase1 subsup')
     vibes.setFigureProperties(dict(x=0, y=510, width=500, height=500))
-    L_clear, L_dark, L_penumbra, L_too_small = thickSIVIA(X0, ThickDisk_subsup(mx, my, rmin, rmax), eps)
-    drawThickSIVIA_Result(L_clear, L_dark, L_penumbra, L_too_small)
+    L_clear, L_dark, L_penumbra, L_too_small = thickSIVIA(X0, ThickDisk_subsup(mx, my, r_min, r_max), eps)
+    draw_thickSIVIA_result(L_clear, L_dark, L_penumbra, L_too_small)
 
     vibes.newFigure('TestCase1 thick')
     vibes.setFigureProperties(dict(x=500, y=10, width=500, height=500))
-    L_clear, L_dark, L_penumbra, L_too_small = thickSIVIA(X0, ThickDisk(mx, my, rmin, rmax), eps)
-    drawThickSIVIA_Result(L_clear, L_dark, L_penumbra, L_too_small)
+    L_clear, L_dark, L_penumbra, L_too_small = thickSIVIA(X0, ThickDisk(mx, my, r_min, r_max), eps)
+    draw_thickSIVIA_result(L_clear, L_dark, L_penumbra, L_too_small)
 
     vibes.endDrawing()
