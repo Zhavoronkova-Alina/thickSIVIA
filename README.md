@@ -33,3 +33,6 @@ Thick Set Inversion Via Interval Analysis
 | 5  | [0.27, 0.3 ]  | [0, 2]  |
 
 ## TestCase 4. *Communication area*
+
+___
+Code is based on [Thick set inversion by B.Desrochers and L.Jaulin](https://www.ensta-bretagne.fr/jaulin/thick.html)
