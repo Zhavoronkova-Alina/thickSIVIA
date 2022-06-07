@@ -66,15 +66,17 @@ class ThickDisk_subsup:
     def test(self, X):
         m = self.m
 
-        Xm = max(Interval(0), sign(
-            (X[0] - m[0].ub()) * (X[0] - m[0].lb())
-        )) * min(
+        Xm = max(
+            Interval(0),
+            sign((X[0] - m[0].ub()) * (X[0] - m[0].lb()))
+        ) * min(
             sqr(X[0] - m[0].lb()), sqr(X[0] - m[0].ub())
-        ) + max(Interval(0), sign(
-            (X[1] - m[1].ub()) * (X[1] - m[1].lb())
+        ) + max(
+            Interval(0),
+            sign((X[1] - m[1].ub()) * (X[1] - m[1].lb()))
         ) * min(
             sqr(X[1] - m[1].lb()), sqr(X[1] - m[1].ub())
-        ))
+        )
 
         Xp = max(
             sqr(X[0] - m[0].lb()), sqr(X[0] - m[0].ub())
