@@ -65,12 +65,12 @@ def testcase_3():
 
     ti, yi = map(IntervalVector, [l_ti, l_yi])
 
-    vibes.newFigure('TestCase2')
+    vibes.newFigure('TestCase3')
     vibes.setFigureProperties(dict(x=0, y=10, width=500, height=500))
     L_clear, L_dark, L_penumbra, L_too_small = thickSIVIA(X0, ParamEstimation(ti, yi), eps)
     draw_thickSIVIA_result(L_clear, L_dark, L_penumbra, L_too_small)
 
-    vibes.newFigure('TestCase2 Classic Intervals')
+    vibes.newFigure('TestCase3 Classic Intervals')
     vibes.setFigureProperties(dict(x=0, y=10, width=500, height=500))
     L_clear, L_dark, L_penumbra, L_too_small = thickSIVIA(X0, ParamEstimation(ti, yi, True), eps)
     draw_thickSIVIA_result(L_clear, L_dark, L_penumbra, L_too_small)
