@@ -1,6 +1,7 @@
 from pyibex import *
 from thickSIVIA import *
 from vibes import vibes
+import time
 
 # The thick set [[ Y ]] = [Y_subset, Y_supset]
 # Y_subset -- disk with center (0, 0) and with radius r_subset = 1
@@ -108,7 +109,7 @@ def testcase_1():
     my = Interval(0).inflate(0.02) # [-0.02, 0.02]
     r_min = 1
     r_max = 2
-    eps = 0.1
+    eps = 0.05
 
     X0 = IntervalVector([[-2, 4], [-3, 3]])
 
@@ -126,5 +127,35 @@ def testcase_1():
     vibes.setFigureProperties(dict(x=500, y=10, width=500, height=500))
     L_clear, L_dark, L_penumbra, L_too_small = thickSIVIA(X0, ThickDisk(mx, my, r_min, r_max), eps)
     draw_thickSIVIA_result(L_clear, L_dark, L_penumbra, L_too_small)
+
+    vibes.endDrawing()
+
+
+def test_case1_time():
+    vibes.beginDrawing()
+
+    mx = Interval(1).inflate(0.3)  # [0.7, 1.3]
+    my = Interval(0).inflate(0.02)  # [-0.02, 0.02]
+    r_min = 1
+    r_max = 2
+    eps = [0.5, 0.1, 0.05, 0.01, 0.005, 0.001]
+
+    X0 = IntervalVector([[-2, 4], [-3, 3]])
+    print("eps & time_thin & time_thick")
+
+    for i in eps:
+
+        tic = time.perf_counter()
+        L_clear, L_dark, L_penumbra, L_too_small = thickSIVIA(X0, ThickDisk(mx, my, r_min, r_max, True), i)
+        toc = time.perf_counter()
+        time_thin = toc - tic
+
+        tic = time.perf_counter()
+        L_clear, L_dark, L_penumbra, L_too_small = thickSIVIA(X0, ThickDisk(mx, my, r_min, r_max), i)
+        toc = time.perf_counter()
+        time_thick = toc - tic
+
+        print(f"{i} & {time_thin:0.6f} & {time_thick:0.6f} \\")
+
 
     vibes.endDrawing()
