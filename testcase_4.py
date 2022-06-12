@@ -12,6 +12,7 @@ class CommArea:
     def test(self, X):
         Xm = IntervalVector(len(self.l_m))
         Xp = IntervalVector(len(self.l_m))
+
         for i, m in enumerate(self.l_m):
             Xm[i] = max(
                 Interval(0),
